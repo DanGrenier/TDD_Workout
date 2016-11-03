@@ -32,11 +32,20 @@
               
             </li>  
           </ul>
+          <ul class = "nav navbar-nav navbar-right">
+            <li><%=link_to "Sign up", new_user_registration_path %></li> 
+          </ul>
         </div>
       </div>
     </nav>
   </header>
 <div class = "container">
+  <%flash.each do |name,msg| %>
+  <div class = 'alert alert-<%="#{name}" %>' >
+    <a href = "#", class = 'close' data-dismiss = 'alert' &#215;>
+      <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+  <%end%>
+  </div>
 <%= yield %>
 </div>
 </body>
