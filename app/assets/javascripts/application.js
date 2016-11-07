@@ -14,5 +14,9 @@
 //= require jquery-ui/datepicker
 //= require jquery_ujs
 //= require bootstrap-sprockets
-//= require turbolinks
+//= require raphael.min
+//= require morris
+// require turbolinks
 //= require_tree .
+
+

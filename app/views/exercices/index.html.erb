@@ -1,3 +1,37 @@
 <div calss="col-md-8 col-xs-12">
+    <% unless @exercices.empty? %>
+      <h1>Listing Exercices</h1>
+      <table class = "table table-striped">
+          <thead>
+              <tr>
+                  <th>Duration (min</th>
+                  <th>Workout details</th>
+                  <th>Activity date</th>
+                  <th colspan="3"></th>
+ 
+              </tr>
+          </thead>
+          <tbody>
+              <%@exercices.each do |exercice| %>
+                <tr>
+                    <td><%=exercice.duration_in_min%></td>
+                    <td><%=truncate(exercice.workout, length: 100)%></td>
+                    <td><%=exercice.workout_date%></td>
+                    <td><%= link_to "Show", [current_user, exercice]%></td>
+                    <td><%= link_to "Edit", [:edit, current_user, exercice]%></td>
+                    <td><%= link_to "Destroy", [current_user, exercice], method: :delete,
+                         data:{confirm: "Are you sure?"}%></td>
+                </tr>
+                <%end%>
+          </tbody>
+      </table>
+      <br>
+    <%else%>
+      <div class = "alert alert-danger message-font text-center" role="alert">
+          No Workouts yet
+      </div>
+      <br>
+    <%end%>
     <%= link_to "New Workout", new_user_exercice_path(current_user), class: "btn btn-primary link"%>
+    <%= content_tag :div, "", id:"chart", data:{workouts: @exercices}%>
 </div>
