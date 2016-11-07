@@ -1,4 +1,4 @@
-class Exercice < ActiveRecord::Base
+class Exercise < ActiveRecord::Base
   belongs_to :user
   
   validates_presence_of :duration_in_min

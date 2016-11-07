@@ -1,5 +1,5 @@
 <div calss="col-md-8 col-xs-12">
-    <% unless @exercices.empty? %>
+    <% unless @exercises.empty? %>
       <h1>Listing Exercices</h1>
       <table class = "table table-striped">
           <thead>
@@ -12,14 +12,14 @@
               </tr>
           </thead>
           <tbody>
-              <%@exercices.each do |exercice| %>
+              <%@exercises.each do |exercise| %>
                 <tr>
-                    <td><%=exercice.duration_in_min%></td>
-                    <td><%=truncate(exercice.workout, length: 100)%></td>
-                    <td><%=exercice.workout_date%></td>
-                    <td><%= link_to "Show", [current_user, exercice]%></td>
-                    <td><%= link_to "Edit", [:edit, current_user, exercice]%></td>
-                    <td><%= link_to "Destroy", [current_user, exercice], method: :delete,
+                    <td><%=exercise.duration_in_min%></td>
+                    <td><%=truncate(exercise.workout, length: 100)%></td>
+                    <td><%=exercise.workout_date%></td>
+                    <td><%= link_to "Show", [current_user, exercise]%></td>
+                    <td><%= link_to "Edit", [:edit, current_user, exercise]%></td>
+                    <td><%= link_to "Destroy", [current_user, exercise], method: :delete,
                          data:{confirm: "Are you sure?"}%></td>
                 </tr>
                 <%end%>
@@ -32,6 +32,6 @@
       </div>
       <br>
     <%end%>
-    <%= link_to "New Workout", new_user_exercice_path(current_user), class: "btn btn-primary link"%>
+    <%= link_to "New Workout", new_user_exercise_path(current_user), class: "btn btn-primary link"%>
     <%= content_tag :div, "", id:"chart", data:{workouts: @exercices}%>
 </div>

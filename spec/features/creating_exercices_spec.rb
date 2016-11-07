@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Creating Exercice" do 
+RSpec.feature "Creating Exercise" do 
     before  do
         @john = User.create(email: 'john@example.com', password: 'password')
         login_as(@john)
@@ -14,12 +14,12 @@ RSpec.feature "Creating Exercice" do
         expect(page).to have_link("Back")
         fill_in "Duration", with: 70
         fill_in "Workout Details", with: "Weight lifting"
-        fill_in "Activity date", with: Date.now
-        click_button "Create Exercice"
+        fill_in "Activity date", with: Date.today
+        click_button "Create Exercise"
         
         expect(page).to have_content("Exercise has been created")
-        exercice = Exercice.last
-        expect(page.current_path).to eq(user_exercice_path(@john, exercice))
+        exercice = Exercise.last
+        expect(page.current_path).to eq(user_exercise_path(@john, exercice))
     end
     
     
@@ -31,7 +31,7 @@ RSpec.feature "Creating Exercice" do
         fill_in "Duration", with: nil
         fill_in "Workout Details", with: ""
         fill_in "Activity date", with: ""
-        click_button "Create Exercice"
+        click_button "Create Exercise"
         
         expect(page).to have_content("Exercise has not been created")
         expect(page).to have_content("Duration in min can't be blank")
