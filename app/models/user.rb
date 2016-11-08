@@ -5,7 +5,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
          
    has_many :exercises
-   
+   has_many :friendships
+   #We don't have a friends table or model. In reality a friend is just "another user"
+   #But to make code clearer and logic easier to understand, we can refer to them as
+   #friends but we have to tell rails what the underlying table/class it is
+   has_many :friends, through: :friendships, class_name: "User"
    validates_presence_of :first_name
    validates_presence_of :last_name
    
@@ -22,5 +26,10 @@ class User < ActiveRecord::Base
        else
            where('first_name LIKE ? or first_name LIKE ? or last_name LIKE ? or last_name LIKE ?', "%#{names_array[0]}%","%#{names_array[1]}%","%#{names_array[0]}%","%#{names_array[1]}%").order(:first_name)
        end
+   end
+   
+   
+   def follows_or_same?(new_friend)
+     friendships.map(&:friend).include?(new_friend) || self == new_friend   
    end
 end

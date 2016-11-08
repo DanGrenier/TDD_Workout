@@ -6,7 +6,7 @@
 <div class = "row">
     <div class = "col-md-10">
         <h2>List of Members</h2>
-        <%= will_paginate @athletes, renderer: BootstrapPagination::Rails, ckass: "pull-left paginate" %>
+        <%= will_paginate @athletes, renderer: BootstrapPagination::Rails, class: "pull-left paginate" %>
     </div>
 </div>
 
@@ -14,6 +14,10 @@
     <% @athletes.each do |athlete| %>
       <div class = "col-md-10 well member">
         <%=athlete.full_name%>
+        <% if current_user %>
+          <%= link_to "Follow", friendships_path(friend_id: athlete.id), method: :post,
+          class: 'btn btn-primary pull-right' unless current_user.follows_or_same?(athlete)%>
+        <%end%>
       </div>
     <%end%>
 </div>
