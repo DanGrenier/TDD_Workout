@@ -10,6 +10,12 @@ class FriendshipsController < ApplicationController
         
     end
     
+    def show
+        @friend = Friendship.find(params[:id]).friend
+        @exercises = @friend.exercises.all
+        
+    end
+    
     private
     
       def friendship_params
